@@ -1,5 +1,14 @@
+import { GlobalCss } from './styles'
+
+import Hero from './components/Hero'
+
 function App() {
-  return <div></div>
+  return (
+    <>
+      <GlobalCss />
+      <Hero />
+    </>
+  )
 }
 
 export default App
