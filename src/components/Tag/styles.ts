@@ -6,4 +6,5 @@ export const TagContainer = styled.div`
   color: ${colors.cream};
   font-size: 14px;
   padding: 6px 4px;
+  display: inline-block;
 `

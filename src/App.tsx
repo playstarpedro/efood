@@ -1,14 +1,17 @@
 import { GlobalCss } from './styles'
 
 import Hero from './components/Hero'
-import Menu from './components/Menu/indes'
+import Product from './components/Product'
+import ProductsList from './components/ProductsList'
 
 function App() {
   return (
     <>
       <GlobalCss />
       <Hero />
-      <Menu />
+      <div className="container">
+        <ProductsList />
+      </div>
     </>
   )
 }
