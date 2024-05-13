@@ -24,4 +24,7 @@ export const Logo = styled.img`
 export const HeroText = styled.h2`
   font-size: 36px;
   text-align: center;
+  font-weight: bold;
+  width: 539px;
+  margin: 0 auto;
 `

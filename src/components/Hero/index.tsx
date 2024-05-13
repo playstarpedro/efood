@@ -7,7 +7,7 @@ const Hero = () => (
     <div className="container">
       <Logo src={logo} alt="efood" />
       <HeroText>
-        Viva experiências gastronômicasno consforto da sua casa
+        Viva experiências gastronômicas no consforto da sua casa
       </HeroText>
     </div>
   </CoverImage>

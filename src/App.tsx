@@ -3,6 +3,7 @@ import { GlobalCss } from './styles'
 import Hero from './components/Hero'
 import Product from './components/Product'
 import ProductsList from './components/ProductsList'
+import Footer from './components/Footer'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <div className="container">
         <ProductsList />
       </div>
+      <Footer />
     </>
   )
 }
