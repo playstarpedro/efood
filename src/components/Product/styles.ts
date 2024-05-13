@@ -17,6 +17,7 @@ export const Card = styled.div`
   .card-container {
     background-color: #fff;
     border: 1px solid ${colors.primaryRed};
+    border-top: none;
     padding: 8px;
     height: 181px;
     margin-top: -5px;
@@ -53,4 +54,5 @@ export const Infos = styled.div`
   position: absolute;
   top: 16px;
   right: 16px;
+  padding-top: 6px;
 `

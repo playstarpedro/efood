@@ -2,25 +2,33 @@ import estrelaPng from '../../assets/images/star_svg.svg'
 
 import Tag from '../Tag'
 
-import { Card, CardHeader, Title, Description } from './styles'
+import { Card, CardHeader, Title, Description, Infos } from './styles'
 
-const Product = () => (
+type Props = {
+  title: string
+  rate: number
+  description: string
+  image: string
+  infos: string[]
+}
+
+const Product = ({ title, rate, description, image, infos }: Props) => (
   <Card>
-    <img className="card-image" src="//placehold.it/472x217" />
+    <img className="card-image" src={image} alt={title} />
+    <Infos>
+      {infos.map((info) => (
+        <Tag key={info}>{info}</Tag>
+      ))}
+    </Infos>
     <div className="card-container">
       <CardHeader>
-        <Title>Nome do prato</Title>
+        <Title>{title}</Title>
         <Title>
-          4.6
+          {rate}
           <img className="star" src={estrelaPng} />
         </Title>
       </CardHeader>
-      <Description>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam, soluta
-        corrupti? Adipisci distinctio dignissimos ullam voluptas harum eveniet
-        debitis veritatis beatae inventore soluta ipsam quibusdam itaque
-        temporibus repudiandae, nesciunt officiis.
-      </Description>
+      <Description>{description}</Description>
       <Tag>Saiba mais</Tag>
     </div>
   </Card>
