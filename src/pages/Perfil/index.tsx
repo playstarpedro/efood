@@ -1,10 +1,10 @@
 import Footer from '../../components/Footer'
-import Hero from '../../components/Hero'
 import ProductsList from '../../components/ProductsList'
 import Dish from '../../models/Dish'
 
 import sushi from '../../assets/images/hioki_sushi.png'
 import pasta from '../../assets/images/pasta.png'
+import Header from '../../components/Header'
 
 const dishs: Dish[] = [
   {
@@ -65,7 +65,7 @@ const dishs: Dish[] = [
 
 const Perfil = () => (
   <>
-    <Hero />
+    <Header />
     <div className="container">
       <ProductsList dishs={dishs} />
     </div>
