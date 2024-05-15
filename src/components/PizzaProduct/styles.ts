@@ -7,7 +7,6 @@ export const PizzaContainer = styled.div`
   width: 320px;
   height: 340px;
   color: ${colors.cream};
-  margin-bottom: 100px;
 `
 
 export const Title = styled.h3`
