@@ -9,7 +9,6 @@ export const CoverImage = styled.div`
   .container {
     padding-top: 64px;
     padding-bottom: 64px;
-    align-items: flex-end;
   }
 
   a {
@@ -18,7 +17,7 @@ export const CoverImage = styled.div`
   }
 `
 
-export const HeaderUl = styled.ul`
+export const HeaderNav = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -29,7 +28,7 @@ export const Logo = styled.img`
   height: 58px;
 `
 
-export const HeaderLi = styled.li`
+export const HeaderA = styled.a`
   font-size: 18px;
   font-weight: 900;
   text-decoration: none;

@@ -5,6 +5,7 @@ import Dish from '../../models/Dish'
 import sushi from '../../assets/images/hioki_sushi.png'
 import pasta from '../../assets/images/pasta.png'
 import Header from '../../components/Header'
+import Presentation from '../../components/Presentation'
 
 const dishs: Dish[] = [
   {
@@ -66,6 +67,7 @@ const dishs: Dish[] = [
 const Perfil = () => (
   <>
     <Header />
+    <Presentation />
     <div className="container">
       <ProductsList dishs={dishs} />
     </div>
