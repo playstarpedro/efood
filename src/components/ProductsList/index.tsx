@@ -4,9 +4,6 @@ import Product from '../Product'
 
 import { Container, List } from './styles'
 
-import hiokiSushi from '../../assets/images/hioki_sushi.png'
-import vitaTrattoria from '../../assets/images/pasta.png'
-
 export type Props = {
   dishs: Dish[]
 }
