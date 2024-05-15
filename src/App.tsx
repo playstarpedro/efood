@@ -1,19 +1,26 @@
+import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+
 import { GlobalCss } from './styles'
 
-import Hero from './components/Hero'
-import Product from './components/Product'
-import ProductsList from './components/ProductsList'
-import Footer from './components/Footer'
+import Home from './pages/Home'
+import Perfil from './pages/Perfil'
+
+const routes = createBrowserRouter([
+  {
+    path: '/',
+    element: <Home />
+  },
+  {
+    path: '/perfil',
+    element: <Perfil />
+  }
+])
 
 function App() {
   return (
     <>
       <GlobalCss />
-      <Hero />
-      <div className="container">
-        <ProductsList />
-      </div>
-      <Footer />
+      <RouterProvider router={routes} />
     </>
   )
 }
