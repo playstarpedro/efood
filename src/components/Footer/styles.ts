@@ -34,6 +34,7 @@ export const IconsList = styled.ul`
 export const FooterParagraph = styled.p`
   font-size: 10px;
   font-wheight: 400;
+  line-height: 12px;
   text-align: center;
   margin: 0 auto;
   width: 480px;

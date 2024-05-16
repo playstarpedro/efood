@@ -7,11 +7,11 @@ const Header = () => (
     <div className="container">
       <HeaderNav>
         <HeaderA>Restaurantes</HeaderA>
-        <li>
-          <Logo src={logo} alt="efood" />
-        </li>
         <HeaderA>0 produto(s) no carrinho</HeaderA>
       </HeaderNav>
+      <li>
+        <Logo src={logo} alt="efood" />
+      </li>
     </div>
   </CoverImage>
 )

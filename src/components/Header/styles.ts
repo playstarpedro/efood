@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 export const CoverImage = styled.div`
-  width: 100%;
   height: 186px;
   background-repeat: no-repeat;
   background-size: cover;
@@ -9,23 +8,22 @@ export const CoverImage = styled.div`
   .container {
     padding-top: 64px;
     padding-bottom: 64px;
-  }
-
-  a {
-    text-decoration: none;
-    font-weight: bold;
+    height: 186px;
+    position: relative;
   }
 `
 
 export const HeaderNav = styled.nav`
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  padding-top: 16px;
 `
 
 export const Logo = styled.img`
-  width: 125px;
-  height: 58px;
+  position: absolute;
+  left: 50%;
+  top: 34%;
+  transform: translateX(-50%);
 `
 
 export const HeaderA = styled.a`
