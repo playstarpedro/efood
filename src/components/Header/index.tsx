@@ -1,6 +1,7 @@
 import { CoverImage, Logo, HeaderNav, HeaderA } from './styles'
 import logo from '../../assets/images/logo.png'
 import coverImage from '../../assets/images/vector.png'
+import { Link } from 'react-router-dom'
 
 const Header = () => (
   <CoverImage style={{ backgroundImage: `url(${coverImage})` }}>
@@ -10,7 +11,9 @@ const Header = () => (
         <HeaderA>0 produto(s) no carrinho</HeaderA>
       </HeaderNav>
       <li>
-        <Logo src={logo} alt="efood" />
+        <Link to="/">
+          <Logo src={logo} alt="efood" />
+        </Link>
       </li>
     </div>
   </CoverImage>
