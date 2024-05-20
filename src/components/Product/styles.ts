@@ -21,6 +21,9 @@ export const Card = styled.div`
     padding: 8px;
     height: 181px;
     margin-top: -5px;
+    display: flex; /* Adicione esta linha */
+    flex-direction: column; /* Adicione esta linha */
+    justify-content: space-between; /* Adicione esta linha */
   }
 
   ${TagContainer} {
@@ -46,7 +49,7 @@ export const Title = styled.h3`
   }
 `
 export const Description = styled.p`
-  margin: 16px 0;
+  margin: 10px 0;
   font-size: 14px;
 `
 

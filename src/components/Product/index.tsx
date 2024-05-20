@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import estrelaPng from '../../assets/images/star_svg.svg'
 
 import Tag from '../Tag'
@@ -5,31 +6,41 @@ import Tag from '../Tag'
 import { Card, CardHeader, Title, Description, Infos } from './styles'
 
 type Props = {
-  title: string
-  rate: number
-  description: string
-  image: string
-  infos: string[]
+  id: number
+  titulo: string
+  destacado: boolean
+  tipo: string
+  avaliacao: number
+  descricao: string
+  capa: string
 }
 
-const Product = ({ title, rate, description, image, infos }: Props) => (
+const Product = ({
+  titulo,
+  avaliacao,
+  descricao,
+  capa,
+  tipo,
+  destacado
+}: Props) => (
   <Card>
-    <img className="card-image" src={image} alt={title} />
+    <img className="card-image" src={capa} alt={titulo} />
     <Infos>
-      {infos.map((info) => (
-        <Tag key={info}>{info}</Tag>
-      ))}
+      {destacado ? <Tag>Destaque da semana</Tag> : ''}
+      <Tag>{tipo}</Tag>
     </Infos>
     <div className="card-container">
       <CardHeader>
-        <Title>{title}</Title>
+        <Title>{titulo}</Title>
         <Title>
-          {rate}
+          {avaliacao}
           <img className="star" src={estrelaPng} />
         </Title>
       </CardHeader>
-      <Description>{description}</Description>
-      <Tag>Saiba mais</Tag>
+      <Description>{descricao}</Description>
+      <Link to="/perfil">
+        <Tag>Saiba mais</Tag>
+      </Link>
     </div>
   </Card>
 )

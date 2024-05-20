@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import Pizza from '../../models/Pizza'
 import PizzaProduct from '../PizzaProduct'
 
@@ -5,15 +7,12 @@ import close from '../../assets/images/close.svg'
 import pizza from '../../assets/images/pizza2.png'
 
 import { Container, List, Modal, ModalContent, ModalButton } from './styles'
-import { useState } from 'react'
 
 export type Props = {
   pizzas: Pizza[]
 }
 
 const PizzaList = ({ pizzas }: Props) => {
-  const [modal, setModal] = useState(false)
-
   return (
     <Container>
       <List>
@@ -26,7 +25,7 @@ const PizzaList = ({ pizzas }: Props) => {
           />
         ))}
       </List>
-      <Modal className="visable">
+      <Modal className="">
         <div className="container">
           <ModalContent>
             <img src={close} alt="fechar" className="close-button" />

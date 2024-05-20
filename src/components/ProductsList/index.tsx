@@ -1,4 +1,4 @@
-import Dish from '../../models/Dish'
+import { Dish } from '../../pages/Home'
 
 import Product from '../Product'
 
@@ -12,14 +12,17 @@ const ProductsList = ({ dishs }: Props) => (
   <Container>
     <List>
       {dishs.map((dish) => (
-        <Product
-          key={dish.id}
-          title={dish.title}
-          rate={dish.rate}
-          description={dish.description}
-          image={dish.image}
-          infos={dish.infos}
-        />
+        <li key={dish.id}>
+          <Product
+            id={dish.id}
+            titulo={dish.titulo}
+            destacado={dish.destacado}
+            tipo={dish.tipo}
+            avaliacao={dish.avaliacao}
+            descricao={dish.descricao}
+            capa={dish.capa}
+          />
+        </li>
       ))}
     </List>
   </Container>
