@@ -4,6 +4,7 @@ type Props = {
   image: string
   title: string
   description: string
+  onClick: () => void
 }
 
 const PizzaProduct = ({ title, description, image }: Props) => (

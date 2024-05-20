@@ -23,7 +23,7 @@ export const Modal = styled.div`
   width: 100%;
   height: 100%;
   z-index: 1;
-  display: none;
+  display: flex;
   align-items: center;
   justify-content: center;
 
@@ -56,6 +56,7 @@ export const ModalContent = styled.div`
     right: 0px;
     margin-top: 8px;
     margin-right: 8px;
+    cursor: pointer;
   }
 
   ul {
