@@ -4,9 +4,6 @@ import Footer from '../../components/Footer'
 import Hero from '../../components/Hero'
 import ProductsList from '../../components/ProductsList'
 
-import sushi from '../../assets/images/hioki_sushi.png'
-import pasta from '../../assets/images/pasta.png'
-
 export type Restaurant = {
   id: number
   titulo: string

@@ -7,6 +7,12 @@ export const PizzaContainer = styled.div`
   width: 320px;
   height: 340px;
   color: ${colors.cream};
+
+  img {
+    object-fit: cover;
+    width: 304px;
+    height: 167px;
+  }
 `
 
 export const Title = styled.h3`

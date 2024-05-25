@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { colors } from '../../styles'
-import { Button } from '../PizzaProduct/styles'
+import { Button } from '../Dish/styles'
 
 export const Container = styled.section`
   padding-top: 56px;
@@ -15,7 +15,7 @@ export const List = styled.ul`
   row-gap: 32px;
 `
 
-export const Modal = styled.div`
+export const ModalStyled = styled.div`
   color: ${colors.white};
   position: fixed;
   top: 0;
