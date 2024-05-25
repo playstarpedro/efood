@@ -15,6 +15,12 @@ export type Props = {
 
 const DishList = ({ dishes }: Props) => {
   const [showModal, setShowModal] = useState(false)
+  const [selectedDishId, setSelectedDishId] = useState(0)
+
+  const coletaId = (id: number) => {
+    setSelectedDishId(id - 1) // Armazene o ID do prato clicado
+    setShowModal(true)
+  }
 
   const dishesToShow = dishes[0]
 
@@ -23,7 +29,7 @@ const DishList = ({ dishes }: Props) => {
       <List>
         {dishesToShow.map((prato) => (
           <Dish
-            onClick={() => setShowModal(!showModal)}
+            clickToShowModal={() => coletaId(prato.id)}
             key={prato.id}
             id={prato.id}
             foto={prato.foto}
@@ -36,14 +42,14 @@ const DishList = ({ dishes }: Props) => {
       </List>
       {showModal && (
         <Modal
-          handleCloseClick={() => setShowModal(!showModal)}
-          key={dishesToShow[0].id}
-          id={dishesToShow[0].id}
-          nome={dishesToShow[0].nome}
-          foto={dishesToShow[0].foto}
-          descricao={dishesToShow[0].descricao}
-          porcao={dishesToShow[0].porcao}
-          preco={dishesToShow[0].preco}
+          clickToCloseModal={() => setShowModal(false)}
+          key={dishesToShow[selectedDishId].id}
+          id={dishesToShow[selectedDishId].id}
+          nome={dishesToShow[selectedDishId].nome}
+          foto={dishesToShow[selectedDishId].foto}
+          descricao={dishesToShow[selectedDishId].descricao}
+          porcao={dishesToShow[selectedDishId].porcao}
+          preco={dishesToShow[selectedDishId].preco}
         />
       )}
     </Container>

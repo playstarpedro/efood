@@ -9,7 +9,7 @@ type Props = {
   preco: number
   id: number
   porcao: string
-  handleCloseClick?: () => void
+  clickToCloseModal?: () => void
 }
 
 const Modal = ({
@@ -19,14 +19,14 @@ const Modal = ({
   descricao,
   preco,
   porcao,
-  handleCloseClick
+  clickToCloseModal
 }: Props) => {
   return (
     <>
       <ModalStyled>
         <ModalContent>
           <img
-            onClick={handleCloseClick}
+            onClick={clickToCloseModal}
             src={close}
             alt="fechar"
             className="close-button"
@@ -48,7 +48,7 @@ const Modal = ({
             </li>
           </ul>
         </ModalContent>
-        <div className="overlay"></div>
+        <div onClick={clickToCloseModal} className="overlay"></div>
       </ModalStyled>
     </>
   )

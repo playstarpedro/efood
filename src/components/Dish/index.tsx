@@ -7,10 +7,10 @@ type PropsModal = {
   preco: number
   id: number
   porcao: string
-  onClick?: () => void // responsável por chamar a função de mostrar a modal
+  clickToShowModal?: () => void // responsável por chamar a função de mostrar a modal
 }
 
-const Dish = ({ nome, descricao, foto, onClick }: PropsModal) => {
+const Dish = ({ nome, descricao, foto, clickToShowModal }: PropsModal) => {
   const getDescricao = (descricao: string) => {
     if (descricao.length > 95) {
       return descricao.slice(0, 120) + '...'
@@ -23,7 +23,7 @@ const Dish = ({ nome, descricao, foto, onClick }: PropsModal) => {
       <img src={foto} alt={nome} />
       <Title>{nome}</Title>
       <Description>{getDescricao(descricao)}</Description>
-      <Button onClick={onClick}>Adicionar ao carrinho</Button>
+      <Button onClick={clickToShowModal}>Adicionar ao carrinho</Button>
     </PizzaContainer>
   )
 }
