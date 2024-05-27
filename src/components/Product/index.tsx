@@ -21,7 +21,8 @@ const Product = ({
   descricao,
   capa,
   tipo,
-  destacado
+  destacado,
+  id
 }: Props) => (
   <Card>
     <img className="card-image" src={capa} alt={titulo} />
@@ -38,7 +39,7 @@ const Product = ({
         </Title>
       </CardHeader>
       <Description>{descricao}</Description>
-      <Link to="/perfil">
+      <Link to={`perfil/${id - 1}`}>
         <Tag>Saiba mais</Tag>
       </Link>
     </div>

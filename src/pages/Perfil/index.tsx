@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
@@ -17,30 +18,30 @@ export type Dishes = {
 }
 
 const Perfil = () => {
+  const { id } = useParams()
+
   const [restaurants, setRestaurants] = useState<Restaurant[]>([])
 
   useEffect(() => {
     fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')
       .then((res) => res.json())
       .then((res) => setRestaurants(res))
-  }, [])
+  }, [id])
 
-  const [dishes, setDishes] = useState<Dishes[]>([])
+  // const [dishes, setDishes] = useState<Dishes[]>([])
 
-  // Suponha que "restaurants" contenha os dados da API conforme mostrado na sua pergunta
   const cardapios = restaurants.map((restaurante) => restaurante.cardapio)
 
-  // Define a variável de estado "dishs" com os cardápios
-  // setDishs(allDishs)
-
-  // console.log(cardapios)
+  const parsedId = id ? parseInt(id, 10) : 0
+  console.log(parsedId)
 
   return (
     <>
       <Header />
       <Presentation />
       <div className="container">
-        <DishList dishes={cardapios} />
+        <div>menu id {id}</div>
+        <DishList dishes={cardapios} menuId={parsedId} />
       </div>
       <Footer />
     </>

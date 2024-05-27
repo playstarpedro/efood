@@ -1,7 +1,4 @@
-import { useEffect, useState } from 'react'
-
-import close from '../../assets/images/close.svg'
-import pizza from '../../assets/images/pizza2.png'
+import { useState } from 'react'
 
 import { Container, List } from './styles'
 
@@ -11,18 +8,20 @@ import Modal from '../Modal'
 
 export type Props = {
   dishes: Dishes[][]
+  menuId: number
 }
 
-const DishList = ({ dishes }: Props) => {
+const DishList = ({ dishes, menuId }: Props) => {
   const [showModal, setShowModal] = useState(false)
   const [selectedDishId, setSelectedDishId] = useState(0)
 
+  // armazene o ID do prato clicado
   const coletaId = (id: number) => {
-    setSelectedDishId(id - 1) // Armazene o ID do prato clicado
+    setSelectedDishId(id - 1)
     setShowModal(true)
   }
 
-  const dishesToShow = dishes[0]
+  const dishesToShow = dishes[menuId]
 
   return (
     <Container>
