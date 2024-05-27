@@ -7,6 +7,8 @@ export const PizzaContainer = styled.div`
   width: 320px;
   height: 340px;
   color: ${colors.cream};
+  display: flex; /* Adicione esta linha */
+  flex-direction: column; /* Adicione esta linha */
 
   img {
     object-fit: cover;
@@ -39,4 +41,5 @@ export const Button = styled.button`
   width: 100%;
   padding: 4px;
   cursor: pointer;
+  margin-top: auto; /* Adicione esta linha para alinhar o botão ao final */
 `
