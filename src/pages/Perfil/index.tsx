@@ -32,16 +32,15 @@ const Perfil = () => {
 
   const cardapios = restaurants.map((restaurante) => restaurante.cardapio)
 
-  const parsedId = id ? parseInt(id, 10) : 0
-  console.log(parsedId)
+  const parsedId = id ? parseInt(id, 10) : 1
+  // console.log(parsedId)
 
   return (
     <>
       <Header />
       <Presentation />
       <div className="container">
-        <div>menu id {id}</div>
-        <DishList dishes={cardapios} menuId={parsedId} />
+        <DishList menus={cardapios} menuId={parsedId} />
       </div>
       <Footer />
     </>

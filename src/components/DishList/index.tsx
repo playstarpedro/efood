@@ -7,11 +7,11 @@ import Dish from '../Dish'
 import Modal from '../Modal'
 
 export type Props = {
-  dishes: Dishes[][]
+  menus: Dishes[][]
   menuId: number
 }
 
-const DishList = ({ dishes, menuId }: Props) => {
+const DishList = ({ menus, menuId }: Props) => {
   const [showModal, setShowModal] = useState(false)
   const [selectedDishId, setSelectedDishId] = useState(0)
 
@@ -21,38 +21,44 @@ const DishList = ({ dishes, menuId }: Props) => {
     setShowModal(true)
   }
 
-  const dishesToShow = dishes[menuId]
+  const dishesToShow = menus[menuId]
 
-  return (
-    <Container>
-      <List>
-        {dishesToShow.map((prato) => (
-          <Dish
-            clickToShowModal={() => coletaId(prato.id)}
-            key={prato.id}
-            id={prato.id}
-            foto={prato.foto}
-            nome={prato.nome}
-            descricao={prato.descricao}
-            preco={prato.preco}
-            porcao={prato.porcao}
+  console.log(dishesToShow)
+
+  if (dishesToShow !== undefined) {
+    return (
+      <Container>
+        <List>
+          {dishesToShow.map((prato) => (
+            <Dish
+              clickToShowModal={() => coletaId(prato.id)}
+              key={prato.id}
+              id={prato.id}
+              foto={prato.foto}
+              nome={prato.nome}
+              descricao={prato.descricao}
+              preco={prato.preco}
+              porcao={prato.porcao}
+            />
+          ))}
+        </List>
+        {showModal && (
+          <Modal
+            clickToCloseModal={() => setShowModal(false)}
+            key={dishesToShow[selectedDishId].id}
+            id={dishesToShow[selectedDishId].id}
+            nome={dishesToShow[selectedDishId].nome}
+            foto={dishesToShow[selectedDishId].foto}
+            descricao={dishesToShow[selectedDishId].descricao}
+            porcao={dishesToShow[selectedDishId].porcao}
+            preco={dishesToShow[selectedDishId].preco}
           />
-        ))}
-      </List>
-      {showModal && (
-        <Modal
-          clickToCloseModal={() => setShowModal(false)}
-          key={dishesToShow[selectedDishId].id}
-          id={dishesToShow[selectedDishId].id}
-          nome={dishesToShow[selectedDishId].nome}
-          foto={dishesToShow[selectedDishId].foto}
-          descricao={dishesToShow[selectedDishId].descricao}
-          porcao={dishesToShow[selectedDishId].porcao}
-          preco={dishesToShow[selectedDishId].preco}
-        />
-      )}
-    </Container>
-  )
+        )}
+      </Container>
+    )
+  } else {
+    return <h1>Carregando</h1>
+  }
 }
 
 export default DishList
