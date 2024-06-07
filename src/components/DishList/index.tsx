@@ -30,14 +30,10 @@ const DishList = ({ menus, menuId }: Props) => {
     } else if (id >= 20 && id < 23) {
       setSelectedDishId(id - 20)
     }
-
-    console.log(selectedDishId)
     setShowModal(true)
   }
 
   const dishesToShow = menus[menuId]
-
-  console.log(dishesToShow)
 
   if (dishesToShow !== undefined) {
     return (

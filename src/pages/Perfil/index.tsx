@@ -28,17 +28,14 @@ const Perfil = () => {
       .then((res) => setRestaurants(res))
   }, [id])
 
-  // const [dishes, setDishes] = useState<Dishes[]>([])
-
   const cardapios = restaurants.map((restaurante) => restaurante.cardapio)
 
   const parsedId = id ? parseInt(id, 10) : 1
-  // console.log(parsedId)
 
   return (
     <>
       <Header />
-      <Presentation />
+      <Presentation restaurants={restaurants} menuId={parsedId} />
       <div className="container">
         <DishList menus={cardapios} menuId={parsedId} />
       </div>
