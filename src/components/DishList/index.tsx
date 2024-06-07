@@ -15,9 +15,23 @@ const DishList = ({ menus, menuId }: Props) => {
   const [showModal, setShowModal] = useState(false)
   const [selectedDishId, setSelectedDishId] = useState(0)
 
-  // armazene o ID do prato clicado
+  // armazene o ID do prato clicado dependendo do cardápio
   const coletaId = (id: number) => {
-    setSelectedDishId(id - 1)
+    if (id >= 1 && id < 8) {
+      setSelectedDishId(id - 1)
+    } else if (id >= 8 && id < 11) {
+      setSelectedDishId(id - 8)
+    } else if (id >= 11 && id < 14) {
+      setSelectedDishId(id - 11)
+    } else if (id >= 14 && id < 17) {
+      setSelectedDishId(id - 14)
+    } else if (id >= 17 && id < 20) {
+      setSelectedDishId(id - 17)
+    } else if (id >= 20 && id < 23) {
+      setSelectedDishId(id - 20)
+    }
+
+    console.log(selectedDishId)
     setShowModal(true)
   }
 
