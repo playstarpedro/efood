@@ -1,15 +1,19 @@
+import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 
 import { GlobalCss } from './styles'
 
 import PageRoutes from './routes'
+import { store } from './store'
 
 function App() {
   return (
-    <BrowserRouter>
-      <GlobalCss />
-      <PageRoutes />
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <GlobalCss />
+        <PageRoutes />
+      </BrowserRouter>
+    </Provider>
   )
 }
 
