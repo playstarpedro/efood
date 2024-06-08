@@ -1,6 +1,5 @@
 import { CoverImage, DishNationality, DishName } from './styles'
 import presentationImage from '../../assets/images/presentation.png'
-import { Restaurant } from '../../pages/Home'
 
 export type Props = {
   restaurants: Restaurant[]

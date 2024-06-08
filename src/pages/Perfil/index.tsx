@@ -5,7 +5,6 @@ import Footer from '../../components/Footer'
 import Header from '../../components/Header'
 import Presentation from '../../components/Presentation'
 
-import { Restaurant } from '../Home'
 import DishList from '../../components/DishList'
 
 export type Dishes = {
