@@ -11,11 +11,11 @@ type Props = {
 }
 
 const Modal = ({ dish, clickToCloseModal }: Props) => {
-  const dispatch = useDispatch
+  const dispatch = useDispatch()
 
-  // const addToCart = () => {
-  //   dispatch(add(dish))
-  // }
+  const addToCart = () => {
+    dispatch(add(dish))
+  }
 
   return (
     <>
@@ -40,7 +40,9 @@ const Modal = ({ dish, clickToCloseModal }: Props) => {
                 <br />
                 Serve: de {dish.porcao}
               </p>
-              <ModalButton>Adicionar ao carrinho - R$ {dish.preco}</ModalButton>
+              <ModalButton onClick={addToCart}>
+                Adicionar ao carrinho - R$ {dish.preco}
+              </ModalButton>
             </li>
           </ul>
         </ModalContent>
