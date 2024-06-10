@@ -7,7 +7,7 @@ type CartState = {
 
 const initialState: CartState = {
   items: [],
-  isOpen: true
+  isOpen: false
 }
 
 const cartSlice = createSlice({
