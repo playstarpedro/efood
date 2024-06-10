@@ -1,26 +1,22 @@
 import { ModalContent, ModalButton, ModalStyled } from './styles'
 
 import close from '../../assets/images/close.svg'
+import { useDispatch } from 'react-redux'
+
+import { add } from '../../store/reducers/cart'
 
 type Props = {
-  foto: string
-  nome: string
-  descricao: string
-  preco: number
-  id: number
-  porcao: string
+  dish: DishType
   clickToCloseModal?: () => void
 }
 
-const Modal = ({
-  id,
-  foto,
-  nome,
-  descricao,
-  preco,
-  porcao,
-  clickToCloseModal
-}: Props) => {
+const Modal = ({ dish, clickToCloseModal }: Props) => {
+  const dispatch = useDispatch
+
+  // const addToCart = () => {
+  //   dispatch(add(dish))
+  // }
+
   return (
     <>
       <ModalStyled>
@@ -33,18 +29,18 @@ const Modal = ({
           />
           <ul>
             <li className="modal-image">
-              <img src={foto} alt={nome} />
+              <img src={dish.foto} alt={dish.nome} />
             </li>
             <li className="modal-text">
               <header>
-                <h3>{nome}</h3>
+                <h3>{dish.nome}</h3>
               </header>
               <p>
-                {descricao} <br />
+                {dish.descricao} <br />
                 <br />
-                Serve: de {porcao}
+                Serve: de {dish.porcao}
               </p>
-              <ModalButton>Adicionar ao carrinho - R$ {preco}</ModalButton>
+              <ModalButton>Adicionar ao carrinho - R$ {dish.preco}</ModalButton>
             </li>
           </ul>
         </ModalContent>

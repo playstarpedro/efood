@@ -11,55 +11,35 @@ export type Props = {
 
 const DishList = ({ selectedRestaurant }: Props) => {
   const [showModal, setShowModal] = useState(false)
-  const [selectedDishId, setSelectedDishId] = useState(0)
+  const [selectedDish, setSelectedDish] = useState<DishType>(
+    selectedRestaurant.cardapio[0]
+  )
   const menu = selectedRestaurant.cardapio
   console.log(menu)
-
-  // armazene o ID do prato clicado dependendo do cardápio
-  const coletaId = (id: number) => {
-    if (id >= 1 && id < 8) {
-      setSelectedDishId(id - 1)
-    } else if (id >= 8 && id < 11) {
-      setSelectedDishId(id - 8)
-    } else if (id >= 11 && id < 14) {
-      setSelectedDishId(id - 11)
-    } else if (id >= 14 && id < 17) {
-      setSelectedDishId(id - 14)
-    } else if (id >= 17 && id < 20) {
-      setSelectedDishId(id - 17)
-    } else if (id >= 20 && id < 23) {
-      setSelectedDishId(id - 20)
-    }
-    setShowModal(true)
-  }
 
   if (menu !== undefined) {
     return (
       <Container>
         <List>
-          {menu.map((prato) => (
+          {menu.map((dish) => (
             <Dish
-              clickToShowModal={() => coletaId(prato.id)}
-              key={prato.id}
-              id={prato.id}
-              foto={prato.foto}
-              nome={prato.nome}
-              descricao={prato.descricao}
-              preco={prato.preco}
-              porcao={prato.porcao}
+              clickToShowModal={() => {
+                setSelectedDish(dish), setShowModal(true)
+              }}
+              key={dish.id}
+              id={dish.id}
+              foto={dish.foto}
+              nome={dish.nome}
+              descricao={dish.descricao}
+              preco={dish.preco}
+              porcao={dish.porcao}
             />
           ))}
         </List>
         {showModal && (
           <Modal
             clickToCloseModal={() => setShowModal(false)}
-            key={menu[selectedDishId].id}
-            id={menu[selectedDishId].id}
-            nome={menu[selectedDishId].nome}
-            foto={menu[selectedDishId].foto}
-            descricao={menu[selectedDishId].descricao}
-            porcao={menu[selectedDishId].porcao}
-            preco={menu[selectedDishId].preco}
+            dish={selectedDish}
           />
         )}
       </Container>
