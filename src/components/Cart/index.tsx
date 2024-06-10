@@ -2,12 +2,24 @@ import pizza from '../../assets/images/pizza2.png'
 import trashCan from '../../assets/images/trash-can.svg'
 import { Button } from '../Dish/styles'
 
+import { close } from '../../store/reducers/cart'
+
 import * as S from './styles'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootReducer } from '../../store'
 
 const Cart = () => {
+  const { isOpen } = useSelector((state: RootReducer) => state.cart)
+
+  const dispatch = useDispatch()
+
+  const closeCart = () => {
+    dispatch(close())
+  }
+
   return (
-    <S.CartContainer className="is-open">
-      <S.Overlay />
+    <S.CartContainer className={isOpen ? 'is-open' : ''}>
+      <S.Overlay onClick={closeCart} />
       <S.SideBar>
         <ul>
           <S.CartItem>

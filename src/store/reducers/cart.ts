@@ -2,10 +2,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 type CartState = {
   items: DishType[]
+  isOpen: boolean
 }
 
 const initialState: CartState = {
-  items: []
+  items: [],
+  isOpen: true
 }
 
 const cartSlice = createSlice({
@@ -14,9 +16,15 @@ const cartSlice = createSlice({
   reducers: {
     add: (state, action: PayloadAction<DishType>) => {
       state.items.push(action.payload)
+    },
+    open: (state) => {
+      state.isOpen = true
+    },
+    close: (state) => {
+      state.isOpen = false
     }
   }
 })
 
-export const { add } = cartSlice.actions
+export const { open, close, add } = cartSlice.actions
 export default cartSlice.reducer

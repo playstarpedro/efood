@@ -30,4 +30,8 @@ export const HeaderA = styled.a`
   font-size: 18px;
   font-weight: 900;
   text-decoration: none;
+
+  span {
+    cursor: pointer;
+  }
 `
