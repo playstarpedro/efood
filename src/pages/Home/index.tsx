@@ -8,7 +8,6 @@ const Home = () => {
   const { data: restaurants, isLoading } = useGetRestaurantsQuery()
 
   if (!isLoading && restaurants !== undefined) {
-    console.log(restaurants)
     return (
       <>
         <Hero />

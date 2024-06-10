@@ -23,7 +23,7 @@ const Dish = ({ nome, descricao, foto, clickToShowModal }: PropsModal) => {
       <img src={foto} alt={nome} />
       <Title>{nome}</Title>
       <Description>{getDescricao(descricao)}</Description>
-      <Button onClick={clickToShowModal}>Adicionar ao carrinho</Button>
+      <Button onClick={clickToShowModal}>Mais detalhes</Button>
     </PizzaContainer>
   )
 }

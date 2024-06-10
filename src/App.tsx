@@ -5,6 +5,7 @@ import { GlobalCss } from './styles'
 
 import PageRoutes from './routes'
 import { store } from './store'
+import Cart from './components/Cart'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <BrowserRouter>
         <GlobalCss />
         <PageRoutes />
+        <Cart />
       </BrowserRouter>
     </Provider>
   )

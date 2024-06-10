@@ -2,18 +2,18 @@ import { useState } from 'react'
 
 import { Container, List } from './styles'
 
-import { Dishes } from '../../pages/Perfil'
 import Dish from '../Dish'
 import Modal from '../Modal'
 
 export type Props = {
-  menus: Dishes[][]
-  menuId: number
+  selectedRestaurant: Restaurant
 }
 
-const DishList = ({ menus, menuId }: Props) => {
+const DishList = ({ selectedRestaurant }: Props) => {
   const [showModal, setShowModal] = useState(false)
   const [selectedDishId, setSelectedDishId] = useState(0)
+  const menu = selectedRestaurant.cardapio
+  console.log(menu)
 
   // armazene o ID do prato clicado dependendo do cardápio
   const coletaId = (id: number) => {
@@ -33,13 +33,11 @@ const DishList = ({ menus, menuId }: Props) => {
     setShowModal(true)
   }
 
-  const dishesToShow = menus[menuId]
-
-  if (dishesToShow !== undefined) {
+  if (menu !== undefined) {
     return (
       <Container>
         <List>
-          {dishesToShow.map((prato) => (
+          {menu.map((prato) => (
             <Dish
               clickToShowModal={() => coletaId(prato.id)}
               key={prato.id}
@@ -55,13 +53,13 @@ const DishList = ({ menus, menuId }: Props) => {
         {showModal && (
           <Modal
             clickToCloseModal={() => setShowModal(false)}
-            key={dishesToShow[selectedDishId].id}
-            id={dishesToShow[selectedDishId].id}
-            nome={dishesToShow[selectedDishId].nome}
-            foto={dishesToShow[selectedDishId].foto}
-            descricao={dishesToShow[selectedDishId].descricao}
-            porcao={dishesToShow[selectedDishId].porcao}
-            preco={dishesToShow[selectedDishId].preco}
+            key={menu[selectedDishId].id}
+            id={menu[selectedDishId].id}
+            nome={menu[selectedDishId].nome}
+            foto={menu[selectedDishId].foto}
+            descricao={menu[selectedDishId].descricao}
+            porcao={menu[selectedDishId].porcao}
+            preco={menu[selectedDishId].preco}
           />
         )}
       </Container>

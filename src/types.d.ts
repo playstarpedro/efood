@@ -26,3 +26,16 @@ declare type Restaurant = {
     }
   ]
 }
+
+declare type Menu = {
+  cardapio: [
+    {
+      foto: string
+      preco: number
+      id: number
+      nome: string
+      descricao: string
+      porcao: string
+    }
+  ]
+}
