@@ -3,7 +3,7 @@ import { ModalContent, ModalButton, ModalStyled } from './styles'
 import close from '../../assets/images/close.svg'
 import { useDispatch } from 'react-redux'
 
-import { add } from '../../store/reducers/cart'
+import { add, open } from '../../store/reducers/cart'
 
 type Props = {
   dish: DishType
@@ -15,6 +15,10 @@ const Modal = ({ dish, clickToCloseModal }: Props) => {
 
   const addToCart = () => {
     dispatch(add(dish))
+  }
+
+  const openCart = () => {
+    dispatch(open())
   }
 
   return (
@@ -40,7 +44,11 @@ const Modal = ({ dish, clickToCloseModal }: Props) => {
                 <br />
                 Serve: de {dish.porcao}
               </p>
-              <ModalButton onClick={addToCart}>
+              <ModalButton
+                onClick={() => {
+                  addToCart(), openCart()
+                }}
+              >
                 Adicionar ao carrinho - R$ {dish.preco}
               </ModalButton>
             </li>

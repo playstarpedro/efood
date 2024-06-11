@@ -34,7 +34,7 @@ export const SideBar = styled.aside`
 
   .empty-text {
     font-size: 14px;
-    line-height: ${colors.cream};
+    color: ${colors.cream};
     text-align: center;
   }
 `
