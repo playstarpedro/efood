@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { colors } from '../../styles'
+import trashCan from '../../assets/images/trash-can.svg'
 
 export const Overlay = styled.div`
   position: absolute;
@@ -68,7 +69,9 @@ export const CartItem = styled.div`
   }
 
   .trash-can {
-    margin-right: 0;
+    background-image: url(${trashCan});
+    background-color: transparent;
+    border: none;
     width: 16px;
     height: 16px;
     position: absolute;

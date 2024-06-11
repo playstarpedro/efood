@@ -1,7 +1,6 @@
-import trashCan from '../../assets/images/trash-can.svg'
 import { Button } from '../Dish/styles'
 
-import { close } from '../../store/reducers/cart'
+import { close, remove } from '../../store/reducers/cart'
 
 import * as S from './styles'
 import { useDispatch, useSelector } from 'react-redux'
@@ -15,6 +14,10 @@ const Cart = () => {
 
   const closeCart = () => {
     dispatch(close())
+  }
+
+  const removeItem = (id: number) => {
+    dispatch(remove(id))
   }
 
   return (
@@ -31,7 +34,11 @@ const Cart = () => {
                     <h3>{item.nome}</h3>
                     <h4>{parseToBrl(item.preco)}</h4>
                   </div>
-                  <img className="trash-can" src={trashCan} alt="lixeira" />
+                  <button
+                    onClick={() => removeItem(item.id)}
+                    className="trash-can"
+                    type="button"
+                  />
                 </S.CartItem>
               ))}
             </ul>
