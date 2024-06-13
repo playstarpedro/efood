@@ -21,16 +21,16 @@ const Header = () => {
     <CoverImage style={{ backgroundImage: `url(${coverImage})` }}>
       <div className="container">
         <HeaderNav>
-          <HeaderA>Restaurantes</HeaderA>
+          <Link to="/">
+            <HeaderA>Restaurantes</HeaderA>
+          </Link>
           <HeaderA>
             {items.length} produto(s) no{' '}
             <span onClick={openCart}>carrinho</span>
           </HeaderA>
         </HeaderNav>
         <li>
-          <Link to="/">
-            <Logo src={logo} alt="efood" />
-          </Link>
+          <Logo src={logo} alt="efood" />
         </li>
       </div>
     </CoverImage>
