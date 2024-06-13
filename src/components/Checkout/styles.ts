@@ -2,6 +2,10 @@ import styled from 'styled-components'
 import { colors } from '../../styles'
 import { Button } from '../Dish/styles'
 
+type InputGroupProps = {
+  maxWidth?: string
+}
+
 export const Overlay = styled.div`
   position: absolute;
   top: 0;
@@ -62,22 +66,26 @@ export const Form = styled.form`
     background-color: ${colors.cream};
   }
 
-  .cep-number {
+  .input-group {
     display: flex;
     justify-content: space-between;
-
-    .input-block {
-      display: block;
-
-      input {
-        width: 155px;
-      }
-    }
   }
 
   .button-area {
     margin-top: 24px;
   }
+
+  p {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+  }
+`
+
+export const InputGroup = styled.div<InputGroupProps>`
+  display: block;
+  flex: auto;
+  max-width: ${(props) => props.maxWidth || 'auto'};
 `
 
 export const FormButton = styled(Button)`
