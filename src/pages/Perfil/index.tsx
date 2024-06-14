@@ -63,8 +63,6 @@ const Perfil = () => {
     }
   }
 
-  // console.log(selectedRestaurant)
-
   const [restaurants, setRestaurants] = useState<Restaurant[]>([])
 
   useEffect(() => {

@@ -15,7 +15,6 @@ const DishList = ({ selectedRestaurant }: Props) => {
     selectedRestaurant.cardapio[0]
   )
   const menu = selectedRestaurant.cardapio
-  console.log(menu)
 
   if (menu !== undefined) {
     return (

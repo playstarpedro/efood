@@ -46,7 +46,12 @@ export const SideBar = styled.aside`
   }
 `
 
-export const Form = styled.form`
+export const Form = styled.div`
+  display: none;
+  &.is-open {
+    display: block;
+  }
+
   label {
     font-size: 14px;
     font-weight: 700;
