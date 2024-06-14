@@ -1,13 +1,22 @@
 import { useState } from 'react'
 import * as S from './styles'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootReducer } from '../../store'
+import { closeCheckout } from '../../store/reducers/cart'
 
 const Checkout = () => {
-  const [isOpen, setIsOpen] = useState(true)
+  const { isCheckoutOpen } = useSelector((state: RootReducer) => state.cart)
   const [checkoutStage, setCheckoutStage] = useState(1)
 
+  const dispatch = useDispatch()
+
+  const setCheckoutClose = () => {
+    dispatch(closeCheckout())
+  }
+
   return (
-    <S.CartContainer className={isOpen ? 'is-open' : ''}>
-      <S.Overlay />
+    <S.CartContainer className={isCheckoutOpen ? 'is-open' : ''}>
+      <S.Overlay onClick={() => setCheckoutClose()} />
       <S.SideBar>
         {checkoutStage === 1 && (
           <S.Form>
@@ -38,7 +47,7 @@ const Checkout = () => {
               <S.FormButton onClick={() => setCheckoutStage(2)}>
                 Continuar com o pagamento
               </S.FormButton>
-              <S.FormButton type="button" onClick={() => setIsOpen(false)}>
+              <S.FormButton type="button" onClick={() => setCheckoutClose()}>
                 Voltar para o carrinho
               </S.FormButton>
             </div>
@@ -100,7 +109,12 @@ const Checkout = () => {
               gastronômica. Bom apetite!
             </p>
             <div className="button-area">
-              <S.FormButton onClick={() => setIsOpen(false)}>
+              <S.FormButton
+                type="button"
+                onClick={() => {
+                  setCheckoutClose(), setCheckoutStage(1)
+                }}
+              >
                 Concluir
               </S.FormButton>
             </div>

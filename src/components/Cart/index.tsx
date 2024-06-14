@@ -1,6 +1,6 @@
 import { Button } from '../Dish/styles'
 
-import { close, remove } from '../../store/reducers/cart'
+import { close, remove, openCheckout } from '../../store/reducers/cart'
 
 import * as S from './styles'
 import { useDispatch, useSelector } from 'react-redux'
@@ -14,6 +14,10 @@ const Cart = () => {
 
   const closeCart = () => {
     dispatch(close())
+  }
+
+  const setCheckoutOpen = () => {
+    dispatch(openCheckout())
   }
 
   const removeItem = (id: number) => {
@@ -46,7 +50,9 @@ const Cart = () => {
               <h4>Valor total</h4>
               <h4>{parseToBrl(getTotalPrice(items))} </h4>
             </S.TotalPrice>
-            <Button>Continuar com a entrega</Button>
+            <Button onClick={() => setCheckoutOpen()}>
+              Continuar com a entrega
+            </Button>
           </>
         ) : (
           <p className="empty-text">
