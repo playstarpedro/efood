@@ -4,6 +4,7 @@ import close from '../../assets/images/close.svg'
 import { useDispatch } from 'react-redux'
 
 import { add, open } from '../../store/reducers/cart'
+import { parseToBrl } from '../../utils'
 
 type Props = {
   dish: DishType
@@ -49,7 +50,7 @@ const Modal = ({ dish, clickToCloseModal }: Props) => {
                   addToCart(), openCart()
                 }}
               >
-                Adicionar ao carrinho - R$ {dish.preco}
+                Adicionar ao carrinho - {parseToBrl(dish.preco)}
               </ModalButton>
             </li>
           </ul>

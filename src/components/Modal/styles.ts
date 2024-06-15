@@ -81,5 +81,10 @@ export const ModalContent = styled.div`
 `
 
 export const ModalButton = styled(Button)`
+  font-size: 14px;
+  font-wheight: 700;
+  line-height: 16px;
   width: 218px;
+  height: 24px;
+  padding: 4px 7px 4px 7px;
 `
