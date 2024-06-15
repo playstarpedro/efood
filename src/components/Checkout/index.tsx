@@ -25,30 +25,26 @@ const Checkout = () => {
         number: 0,
         complement: ''
       },
-      payment: {
-        card: {
-          name: 'string',
-          number: 'string',
-          code: 123,
-          expires: {
-            month: 12,
-            year: 1234
-          }
-        }
-      }
+      name: '',
+      cardNumber: '',
+      code: '',
+      expiresMonth: '',
+      expiresYear: ''
     },
     onSubmit: (values) => {
       console.log(values)
     }
   })
 
-  console.log(form.values)
-
   return (
     <S.CartContainer className={isCheckoutOpen ? 'is-open' : ''}>
-      <S.Overlay onClick={() => setCheckoutClose()} />
+      {/* <S.Overlay onClick={() => setCheckoutClose()} /> */}
       <S.SideBar>
-        <form onSubmit={form.handleSubmit}>
+        <form
+          onSubmit={() => {
+            form.handleSubmit
+          }}
+        >
           <S.Form className={checkoutStage === 1 ? 'is-open' : ''}>
             <h3>Entrega</h3>
             <div>
@@ -124,15 +120,16 @@ const Checkout = () => {
               </S.FormButton>
             </div>
           </S.Form>
+          {/* segunda parte do checkout  */}
           <S.Form className={checkoutStage === 2 ? 'is-open' : ''}>
             <h3>Pagamento - Valor a pagar R$ 190,90</h3>
             <div>
-              <label htmlFor="cardName">Nome no cartão</label>
+              <label htmlFor="name">Nome no cartão</label>
               <input
-                id="cardName"
+                id="name"
                 type="text"
-                name="cardName"
-                value={form.values.payment.card.name}
+                name="name"
+                value={form.values.name}
                 onChange={form.handleChange}
                 onBlur={form.handleBlur}
               />
@@ -144,18 +141,18 @@ const Checkout = () => {
                   id="cardNumber"
                   type="text"
                   name="cardNumber"
-                  value={form.values.payment.card.number}
+                  value={form.values.cardNumber}
                   onChange={form.handleChange}
                   onBlur={form.handleBlur}
                 />
               </S.InputGroup>
               <S.InputGroup maxWidth="87px">
-                <label htmlFor="cardCode">CVV</label>
+                <label htmlFor="code">CVV</label>
                 <input
-                  id="cardCode"
+                  id="code"
                   type="number"
-                  name="cardCode"
-                  value={form.values.payment.card.code}
+                  name="code"
+                  value={form.values.code}
                   onChange={form.handleChange}
                   onBlur={form.handleBlur}
                 />
@@ -166,9 +163,9 @@ const Checkout = () => {
                 <label htmlFor="expiresMonth">Mês de vencimento</label>
                 <input
                   id="expiresMonth"
-                  type="number"
+                  type="text"
                   name="expiresMonth"
-                  value={form.values.payment.card.expires.month}
+                  value={form.values.expiresMonth}
                   onChange={form.handleChange}
                   onBlur={form.handleBlur}
                 />
@@ -177,9 +174,9 @@ const Checkout = () => {
                 <label htmlFor="expiresYear">Ano de vencimento</label>
                 <input
                   id="expiresYear"
-                  type="number"
+                  type="text"
                   name="expiresYear"
-                  value={form.values.payment.card.expires.year}
+                  value={form.values.expiresYear}
                   onChange={form.handleChange}
                   onBlur={form.handleBlur}
                 />
