@@ -2,11 +2,10 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import logo from '../../assets/images/logo.png'
 import coverImage from '../../assets/images/vector.png'
-import { Link } from 'react-router-dom'
 
 import { open } from '../../store/reducers/cart'
 
-import { CoverImage, Logo, HeaderNav, HeaderA } from './styles'
+import { CoverImage, Logo, HeaderNav, HeaderA, StyledLink } from './styles'
 import { RootReducer } from '../../store'
 
 const Header = () => {
@@ -21,9 +20,9 @@ const Header = () => {
     <CoverImage style={{ backgroundImage: `url(${coverImage})` }}>
       <div className="container">
         <HeaderNav>
-          <Link to="/">
+          <StyledLink to="/">
             <HeaderA>Restaurantes</HeaderA>
-          </Link>
+          </StyledLink>
           <HeaderA>
             {items.length} produto(s) no{' '}
             <span onClick={openCart}>carrinho</span>

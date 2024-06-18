@@ -50,7 +50,11 @@ const Cart = () => {
               <h4>Valor total</h4>
               <h4>{parseToBrl(getTotalPrice(items))} </h4>
             </S.TotalPrice>
-            <Button onClick={() => setCheckoutOpen()}>
+            <Button
+              onClick={() => {
+                setCheckoutOpen(), closeCart()
+              }}
+            >
               Continuar com a entrega
             </Button>
           </>

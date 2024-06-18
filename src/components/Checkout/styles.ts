@@ -91,6 +91,10 @@ export const InputGroup = styled.div<InputGroupProps>`
   display: block;
   flex: auto;
   max-width: ${(props) => props.maxWidth || 'auto'};
+
+  small {
+    color: ${colors.backGroundColor};
+  }
 `
 
 export const FormButton = styled(Button)`

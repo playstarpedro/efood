@@ -1,4 +1,13 @@
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
+import { colors } from '../../styles'
+
+export const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: ${colors.primaryRed};
+  &:hover {
+  }
+`
 
 export const CoverImage = styled.div`
   height: 186px;
@@ -26,7 +35,7 @@ export const Logo = styled.img`
   transform: translateX(-50%);
 `
 
-export const HeaderA = styled.a`
+export const HeaderA = styled.h4`
   font-size: 18px;
   font-weight: 900;
   text-decoration: none;
