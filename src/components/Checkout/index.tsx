@@ -2,15 +2,14 @@ import { useState } from 'react'
 import * as S from './styles'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootReducer } from '../../store'
-import { closeCheckout, open } from '../../store/reducers/cart'
+import { closeCheckout, open, clear } from '../../store/reducers/cart'
 import { useFormik } from 'formik'
 import { getTotalPrice, parseToBrl } from '../../utils'
 import * as Yup from 'yup'
 import { usePurchaseMutation } from '../../services/api'
 
 const Checkout = () => {
-  const [purchase, { isLoading, isError, data, isSuccess }] =
-    usePurchaseMutation()
+  const [purchase, { data, isSuccess }] = usePurchaseMutation()
 
   const { isCheckoutOpen, items } = useSelector(
     (state: RootReducer) => state.cart
@@ -25,6 +24,10 @@ const Checkout = () => {
 
   const setCartOpen = () => {
     dispatch(open())
+  }
+
+  const clearCart = () => {
+    dispatch(clear())
   }
 
   const form = useFormik({
@@ -120,6 +123,14 @@ const Checkout = () => {
     if (isTouched && isInvalid) return message
   }
 
+  const checkInputHasError = (fieldName: string) => {
+    const isTouched = fieldName in form.touched
+    const isInvalid = fieldName in form.errors
+    const hasError = isTouched && isInvalid
+
+    return hasError
+  }
+
   return (
     <S.CartContainer className={isCheckoutOpen ? 'is-open' : ''}>
       <S.Overlay onClick={() => setCheckoutClose()} />
@@ -144,9 +155,9 @@ const Checkout = () => {
             </p>
             <div className="button-area">
               <S.FormButton
-                type="button"
+                type="submit"
                 onClick={() => {
-                  setCheckoutClose(), setCheckoutStage(1)
+                  setCheckoutClose(), setCheckoutStage(1), clearCart()
                 }}
               >
                 Concluir
@@ -166,10 +177,8 @@ const Checkout = () => {
                   value={form.values.receiver}
                   onChange={form.handleChange}
                   onBlur={form.handleBlur}
+                  className={checkInputHasError('receiver') ? 'error' : ''}
                 />
-                <small>
-                  {getErrorMessage('receiver', form.errors.receiver)}
-                </small>
                 <label htmlFor="adress">Endereço</label>
                 <input
                   id="description"
@@ -178,10 +187,8 @@ const Checkout = () => {
                   value={form.values.description}
                   onChange={form.handleChange}
                   onBlur={form.handleBlur}
+                  className={checkInputHasError('description') ? 'error' : ''}
                 />
-                <small>
-                  {getErrorMessage('description', form.errors.description)}
-                </small>
                 <label htmlFor="city">Cidade</label>
                 <input
                   id="city"
@@ -190,8 +197,8 @@ const Checkout = () => {
                   value={form.values.city}
                   onChange={form.handleChange}
                   onBlur={form.handleBlur}
+                  className={checkInputHasError('city') ? 'error' : ''}
                 />
-                <small>{getErrorMessage('city', form.errors.city)}</small>
               </div>
               <div className="input-group">
                 <S.InputGroup maxWidth="155px">
@@ -203,10 +210,8 @@ const Checkout = () => {
                     value={form.values.zipCode}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
+                    className={checkInputHasError('zipCode') ? 'error' : ''}
                   />
-                  <small>
-                    {getErrorMessage('zipCode', form.errors.zipCode)}
-                  </small>
                 </S.InputGroup>
                 <S.InputGroup maxWidth="155px">
                   <label htmlFor="number">Número</label>
@@ -217,8 +222,8 @@ const Checkout = () => {
                     value={form.values.number}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
+                    className={checkInputHasError('number') ? 'error' : ''}
                   />
-                  <small>{getErrorMessage('number', form.errors.number)}</small>
                 </S.InputGroup>
               </div>
               <div>
@@ -230,6 +235,7 @@ const Checkout = () => {
                   value={form.values.complement}
                   onChange={form.handleChange}
                   onBlur={form.handleBlur}
+                  className={checkInputHasError('complement') ? 'error' : ''}
                 />
               </div>
               <div className="button-area">
@@ -265,6 +271,7 @@ const Checkout = () => {
                   value={form.values.name}
                   onChange={form.handleChange}
                   onBlur={form.handleBlur}
+                  className={checkInputHasError('name') ? 'error' : ''}
                 />
               </div>
               <div className="input-group">
@@ -277,6 +284,7 @@ const Checkout = () => {
                     value={form.values.cardNumber}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
+                    className={checkInputHasError('cardNumber') ? 'error' : ''}
                   />
                 </S.InputGroup>
                 <S.InputGroup maxWidth="87px">
@@ -288,6 +296,7 @@ const Checkout = () => {
                     value={form.values.code}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
+                    className={checkInputHasError('code') ? 'error' : ''}
                   />
                 </S.InputGroup>
               </div>
@@ -301,6 +310,9 @@ const Checkout = () => {
                     value={form.values.expiresMonth}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
+                    className={
+                      checkInputHasError('expiresMonth') ? 'error' : ''
+                    }
                   />
                 </S.InputGroup>
                 <S.InputGroup maxWidth="155px">
@@ -312,11 +324,17 @@ const Checkout = () => {
                     value={form.values.expiresYear}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
+                    className={checkInputHasError('expiresYear') ? 'error' : ''}
                   />
                 </S.InputGroup>
               </div>
               <div className="button-area">
-                <S.FormButton type="submit" onClick={() => form.handleSubmit}>
+                <S.FormButton
+                  type="submit"
+                  onClick={() => {
+                    form.handleSubmit
+                  }}
+                >
                   Finalizar pagamento
                 </S.FormButton>
                 <S.FormButton type="button" onClick={() => setCheckoutStage(1)}>

@@ -69,6 +69,10 @@ export const Form = styled.div`
     margin-bottom: 8px;
     border: 1px solid ${colors.cream};
     background-color: ${colors.cream};
+
+    &.error {
+      border: 1px solid red;
+    }
   }
 
   .input-group {
