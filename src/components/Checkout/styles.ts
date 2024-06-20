@@ -1,10 +1,18 @@
 import styled from 'styled-components'
 import { colors } from '../../styles'
 import { Button } from '../Dish/styles'
+import { Link } from 'react-router-dom'
 
 type InputGroupProps = {
   maxWidth?: string
 }
+
+export const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: ${colors.primaryRed};
+  &:hover {
+  }
+`
 
 export const Overlay = styled.div`
   position: absolute;

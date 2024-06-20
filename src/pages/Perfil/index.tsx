@@ -15,6 +15,7 @@ import {
   useGetRestaurantId5Query,
   useGetRestaurantId6Query
 } from '../../services/api'
+import Checkout from '../../components/Checkout'
 
 export type Dishes = {
   foto: string
@@ -76,6 +77,7 @@ const Perfil = () => {
   if (selectedRestaurant !== undefined) {
     return (
       <>
+        <Checkout />
         <Header />
         <Presentation restaurants={restaurants} menuId={parsedId} />
         <div className="container">

@@ -7,6 +7,7 @@ import { useFormik } from 'formik'
 import { getTotalPrice, parseToBrl } from '../../utils'
 import * as Yup from 'yup'
 import { usePurchaseMutation } from '../../services/api'
+import { Link } from 'react-router-dom'
 
 const Checkout = () => {
   const [purchase, { data, isSuccess }] = usePurchaseMutation()
@@ -116,13 +117,6 @@ const Checkout = () => {
     }
   })
 
-  const getErrorMessage = (fieldName: string, message?: string) => {
-    const isTouched = fieldName in form.touched
-    const isInvalid = fieldName in form.errors
-
-    if (isTouched && isInvalid) return message
-  }
-
   const checkInputHasError = (fieldName: string) => {
     const isTouched = fieldName in form.touched
     const isInvalid = fieldName in form.errors
@@ -160,7 +154,7 @@ const Checkout = () => {
                   setCheckoutClose(), setCheckoutStage(1), clearCart()
                 }}
               >
-                Concluir
+                <S.StyledLink to="/">Concluir</S.StyledLink>
               </S.FormButton>
             </div>
           </S.Form>
