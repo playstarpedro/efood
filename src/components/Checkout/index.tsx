@@ -9,7 +9,8 @@ import * as Yup from 'yup'
 import { usePurchaseMutation } from '../../services/api'
 
 const Checkout = () => {
-  const [purchase, { isLoading, isError, data }] = usePurchaseMutation()
+  const [purchase, { isLoading, isError, data, isSuccess }] =
+    usePurchaseMutation()
 
   const { isCheckoutOpen, items } = useSelector(
     (state: RootReducer) => state.cart
@@ -51,8 +52,8 @@ const Checkout = () => {
         .min(5, 'A cidade precisa ter pelo menos 5 caractetres')
         .required('O campo é obrigatório'),
       zipCode: Yup.string()
-        .min(9, 'O campo precisa ter 9 caracteres')
-        .max(9, 'O campo precisa ter 9 caracteres')
+        .min(9, 'O CEP precisa ter 9 caracteres')
+        .max(9, 'O CEP precisa ter 9 caracteres')
         .required('O campo é obrigatório'),
       number: Yup.number().required('O campo é obrigatório'),
       complement: Yup.string().min(
@@ -61,19 +62,22 @@ const Checkout = () => {
       ),
 
       name: Yup.string()
-        .min(5, 'O endereço precisa ter pelo menos 5 caractetres')
+        .min(5, 'O Nome do Cartão precisa ter pelo menos 5 caractetres')
         .required('O campo é obrigatório'),
       cardNumber: Yup.string()
-        .min(5, 'O endereço precisa ter pelo menos 5 caractetres')
+        .min(5, 'O Número do Cartão precisa ter pelo menos 5 caractetres')
         .required('O campo é obrigatório'),
       code: Yup.string()
-        .min(3, 'O endereço precisa ter pelo menos 3 caractetres')
+        .min(3, 'O CVV precisa ter 3 caractetres')
+        .max(3, 'O CVV precisa ter 3 caractetres')
         .required('O campo é obrigatório'),
       expiresMonth: Yup.string()
-        .min(2, 'O endereço precisa ter pelo menos 2 caractetres')
+        .min(2, 'O mês de expiração precisa ter 2 caractetres')
+        .max(2, 'O mês de expiração precisa ter 2 caractetres')
         .required('O campo é obrigatório'),
       expiresYear: Yup.string()
-        .min(2, 'O endereço precisa ter pelo menos 2 caractetres')
+        .min(2, 'O ano de expiração precisa ter 2 caractetres')
+        .max(2, 'O ano de expiração precisa ter 2 caractetres')
         .required('O campo é obrigatório')
     }),
     onSubmit: (values) => {
@@ -120,201 +124,208 @@ const Checkout = () => {
     <S.CartContainer className={isCheckoutOpen ? 'is-open' : ''}>
       <S.Overlay onClick={() => setCheckoutClose()} />
       <S.SideBar>
-        <form onSubmit={form.handleSubmit}>
-          <S.Form className={checkoutStage === 1 ? 'is-open' : ''}>
-            <h3>Entrega</h3>
-            <div>
-              <label htmlFor="receiver">Quem irá receber</label>
-              <input
-                id="receiver"
-                type="text"
-                name="receiver"
-                value={form.values.receiver}
-                onChange={form.handleChange}
-                onBlur={form.handleBlur}
-              />
-              <small>{getErrorMessage('receiver', form.errors.receiver)}</small>
-              <label htmlFor="adress">Endereço</label>
-              <input
-                id="description"
-                type="text"
-                name="description"
-                value={form.values.description}
-                onChange={form.handleChange}
-                onBlur={form.handleBlur}
-              />
-              <small>
-                {getErrorMessage('description', form.errors.description)}
-              </small>
-              <label htmlFor="city">Cidade</label>
-              <input
-                id="city"
-                type="text"
-                name="city"
-                value={form.values.city}
-                onChange={form.handleChange}
-                onBlur={form.handleBlur}
-              />
-              <small>{getErrorMessage('city', form.errors.city)}</small>
-            </div>
-            <div className="input-group">
-              <S.InputGroup maxWidth="155px">
-                <label htmlFor="zipCode">CEP</label>
-                <input
-                  id="zipCode"
-                  type="text"
-                  name="zipCode"
-                  value={form.values.zipCode}
-                  onChange={form.handleChange}
-                  onBlur={form.handleBlur}
-                />
-                <small>{getErrorMessage('zipCode', form.errors.zipCode)}</small>
-              </S.InputGroup>
-              <S.InputGroup maxWidth="155px">
-                <label htmlFor="number">Número</label>
-                <input
-                  id="number"
-                  type="number"
-                  name="number"
-                  value={form.values.number}
-                  onChange={form.handleChange}
-                  onBlur={form.handleBlur}
-                />
-                <small>{getErrorMessage('number', form.errors.number)}</small>
-              </S.InputGroup>
-            </div>
-            <div>
-              <label htmlFor="complement">Complemento (opcional)</label>
-              <input
-                id="complement"
-                type="text"
-                name="complement"
-                value={form.values.complement}
-                onChange={form.handleChange}
-                onBlur={form.handleBlur}
-              />
-            </div>
+        {isSuccess && data ? (
+          <S.Form className="is-open">
+            <h3>Pedido realizado - {data.orderId}</h3>
+            <p>
+              Estamos felizes em informar que seu pedido já está em processo de
+              preparação e, em breve, será entregue no endereço fornecido.{' '}
+              <br />
+              <br />
+              Gostaríamos de ressaltar que nossos entregadores não estão
+              autorizados a realizar cobranças extras. <br />
+              <br />
+              Lembre-se da importância de higienizar as mãos após o recebimento
+              do pedido, garantindo assim sua segurança e bem-estar durante a
+              refeição. <br />
+              <br />
+              Esperamos que desfrute de uma deliciosa e agradável experiência
+              gastronômica. Bom apetite!
+            </p>
             <div className="button-area">
               <S.FormButton
                 type="button"
                 onClick={() => {
-                  setCheckoutStage(2)
+                  setCheckoutClose(), setCheckoutStage(1)
                 }}
               >
-                Continuar com o pagamento
-              </S.FormButton>
-              <S.FormButton
-                type="button"
-                onClick={() => {
-                  setCheckoutClose(), setCartOpen()
-                }}
-              >
-                Voltar para o carrinho
+                Concluir
               </S.FormButton>
             </div>
           </S.Form>
-          {/* segunda parte do checkout  */}
-          <S.Form className={checkoutStage === 2 ? 'is-open' : ''}>
-            <h3>
-              Pagamento - Valor a pagar {parseToBrl(getTotalPrice(items))}{' '}
-            </h3>
-            <div>
-              <label htmlFor="name">Nome no cartão</label>
-              <input
-                id="name"
-                type="text"
-                name="name"
-                value={form.values.name}
-                onChange={form.handleChange}
-                onBlur={form.handleBlur}
-              />
-            </div>
-            <div className="input-group">
-              <S.InputGroup maxWidth="228px">
-                <label htmlFor="cardNumber">Número do cartão</label>
+        ) : (
+          <form onSubmit={form.handleSubmit}>
+            <S.Form className={checkoutStage === 1 ? 'is-open' : ''}>
+              <h3>Entrega</h3>
+              <div>
+                <label htmlFor="receiver">Quem irá receber</label>
                 <input
-                  id="cardNumber"
+                  id="receiver"
                   type="text"
-                  name="cardNumber"
-                  value={form.values.cardNumber}
+                  name="receiver"
+                  value={form.values.receiver}
                   onChange={form.handleChange}
                   onBlur={form.handleBlur}
                 />
-              </S.InputGroup>
-              <S.InputGroup maxWidth="87px">
-                <label htmlFor="code">CVV</label>
+                <small>
+                  {getErrorMessage('receiver', form.errors.receiver)}
+                </small>
+                <label htmlFor="adress">Endereço</label>
                 <input
-                  id="code"
-                  type="number"
-                  name="code"
-                  value={form.values.code}
-                  onChange={form.handleChange}
-                  onBlur={form.handleBlur}
-                />
-              </S.InputGroup>
-            </div>
-            <div className="input-group">
-              <S.InputGroup maxWidth="155px">
-                <label htmlFor="expiresMonth">Mês de vencimento</label>
-                <input
-                  id="expiresMonth"
+                  id="description"
                   type="text"
-                  name="expiresMonth"
-                  value={form.values.expiresMonth}
+                  name="description"
+                  value={form.values.description}
                   onChange={form.handleChange}
                   onBlur={form.handleBlur}
                 />
-              </S.InputGroup>
-              <S.InputGroup maxWidth="155px">
-                <label htmlFor="expiresYear">Ano de vencimento</label>
+                <small>
+                  {getErrorMessage('description', form.errors.description)}
+                </small>
+                <label htmlFor="city">Cidade</label>
                 <input
-                  id="expiresYear"
+                  id="city"
                   type="text"
-                  name="expiresYear"
-                  value={form.values.expiresYear}
+                  name="city"
+                  value={form.values.city}
                   onChange={form.handleChange}
                   onBlur={form.handleBlur}
                 />
-              </S.InputGroup>
-            </div>
-            <div className="button-area">
-              <S.FormButton type="submit" onClick={() => form.handleSubmit}>
-                Finalizar pagamento
-              </S.FormButton>
-              <S.FormButton type="button" onClick={() => setCheckoutStage(1)}>
-                Voltar para a edição de endereço
-              </S.FormButton>
-            </div>
-          </S.Form>
-        </form>
-        {/* messagem de sucesso */}
-        {/* <S.Form className={checkoutStage === 3 ? 'is-open' : ''}>
-          <h3>Pedido realizado - ORDER_ID</h3>
-          <p>
-            Estamos felizes em informar que seu pedido já está em processo de
-            preparação e, em breve, será entregue no endereço fornecido. <br />
-            <br />
-            Gostaríamos de ressaltar que nossos entregadores não estão
-            autorizados a realizar cobranças extras. <br />
-            <br />
-            Lembre-se da importância de higienizar as mãos após o recebimento do
-            pedido, garantindo assim sua segurança e bem-estar durante a
-            refeição. <br />
-            <br />
-            Esperamos que desfrute de uma deliciosa e agradável experiência
-            gastronômica. Bom apetite!
-          </p>
-          <div className="button-area">
-            <S.FormButton
-              type="button"
-              onClick={() => {
-                setCheckoutClose(), setCheckoutStage(1)
-              }}
-            >
-              Concluir
-            </S.FormButton>
-          </div>
-        </S.Form> */}
+                <small>{getErrorMessage('city', form.errors.city)}</small>
+              </div>
+              <div className="input-group">
+                <S.InputGroup maxWidth="155px">
+                  <label htmlFor="zipCode">CEP</label>
+                  <input
+                    id="zipCode"
+                    type="text"
+                    name="zipCode"
+                    value={form.values.zipCode}
+                    onChange={form.handleChange}
+                    onBlur={form.handleBlur}
+                  />
+                  <small>
+                    {getErrorMessage('zipCode', form.errors.zipCode)}
+                  </small>
+                </S.InputGroup>
+                <S.InputGroup maxWidth="155px">
+                  <label htmlFor="number">Número</label>
+                  <input
+                    id="number"
+                    type="number"
+                    name="number"
+                    value={form.values.number}
+                    onChange={form.handleChange}
+                    onBlur={form.handleBlur}
+                  />
+                  <small>{getErrorMessage('number', form.errors.number)}</small>
+                </S.InputGroup>
+              </div>
+              <div>
+                <label htmlFor="complement">Complemento (opcional)</label>
+                <input
+                  id="complement"
+                  type="text"
+                  name="complement"
+                  value={form.values.complement}
+                  onChange={form.handleChange}
+                  onBlur={form.handleBlur}
+                />
+              </div>
+              <div className="button-area">
+                <S.FormButton
+                  type="button"
+                  onClick={() => {
+                    setCheckoutStage(2)
+                  }}
+                >
+                  Continuar com o pagamento
+                </S.FormButton>
+                <S.FormButton
+                  type="button"
+                  onClick={() => {
+                    setCheckoutClose(), setCartOpen()
+                  }}
+                >
+                  Voltar para o carrinho
+                </S.FormButton>
+              </div>
+            </S.Form>
+            {/* segunda parte do checkout  */}
+            <S.Form className={checkoutStage === 2 ? 'is-open' : ''}>
+              <h3>
+                Pagamento - Valor a pagar {parseToBrl(getTotalPrice(items))}{' '}
+              </h3>
+              <div>
+                <label htmlFor="name">Nome no cartão</label>
+                <input
+                  id="name"
+                  type="text"
+                  name="name"
+                  value={form.values.name}
+                  onChange={form.handleChange}
+                  onBlur={form.handleBlur}
+                />
+              </div>
+              <div className="input-group">
+                <S.InputGroup maxWidth="228px">
+                  <label htmlFor="cardNumber">Número do cartão</label>
+                  <input
+                    id="cardNumber"
+                    type="number"
+                    name="cardNumber"
+                    value={form.values.cardNumber}
+                    onChange={form.handleChange}
+                    onBlur={form.handleBlur}
+                  />
+                </S.InputGroup>
+                <S.InputGroup maxWidth="87px">
+                  <label htmlFor="code">CVV</label>
+                  <input
+                    id="code"
+                    type="number"
+                    name="code"
+                    value={form.values.code}
+                    onChange={form.handleChange}
+                    onBlur={form.handleBlur}
+                  />
+                </S.InputGroup>
+              </div>
+              <div className="input-group">
+                <S.InputGroup maxWidth="155px">
+                  <label htmlFor="expiresMonth">Mês de vencimento</label>
+                  <input
+                    id="expiresMonth"
+                    type="number"
+                    name="expiresMonth"
+                    value={form.values.expiresMonth}
+                    onChange={form.handleChange}
+                    onBlur={form.handleBlur}
+                  />
+                </S.InputGroup>
+                <S.InputGroup maxWidth="155px">
+                  <label htmlFor="expiresYear">Ano de vencimento</label>
+                  <input
+                    id="expiresYear"
+                    type="number"
+                    name="expiresYear"
+                    value={form.values.expiresYear}
+                    onChange={form.handleChange}
+                    onBlur={form.handleBlur}
+                  />
+                </S.InputGroup>
+              </div>
+              <div className="button-area">
+                <S.FormButton type="submit" onClick={() => form.handleSubmit}>
+                  Finalizar pagamento
+                </S.FormButton>
+                <S.FormButton type="button" onClick={() => setCheckoutStage(1)}>
+                  Voltar para a edição de endereço
+                </S.FormButton>
+              </div>
+            </S.Form>
+          </form>
+        )}
       </S.SideBar>
     </S.CartContainer>
   )
