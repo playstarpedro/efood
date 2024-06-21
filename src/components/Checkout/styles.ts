@@ -79,7 +79,7 @@ export const Form = styled.div`
     background-color: ${colors.cream};
 
     &.error {
-      border: 1px solid red;
+      border: 1px solid blue;
     }
   }
 

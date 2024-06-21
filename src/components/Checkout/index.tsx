@@ -125,6 +125,30 @@ const Checkout = () => {
     return hasError
   }
 
+  const checkFirstFormTouched = () => {
+    // Verifica se os campos obrigatórios estão preenchidos
+    const areInputsValid =
+      form.touched.receiver &&
+      form.touched.description &&
+      form.touched.city &&
+      form.touched.zipCode &&
+      form.touched.number
+
+    return !areInputsValid // Mova o return para o final da função
+  }
+
+  const checkFirstFormError = () => {
+    const areInputsValid =
+      form.errors.receiver !== undefined ||
+      form.errors.description !== undefined ||
+      form.errors.city !== undefined ||
+      form.errors.zipCode !== undefined ||
+      form.errors.number !== undefined ||
+      form.errors.receiver !== undefined
+
+    return !!areInputsValid
+  }
+
   return (
     <S.CartContainer className={isCheckoutOpen ? 'is-open' : ''}>
       <S.Overlay onClick={() => setCheckoutClose()} />
@@ -238,6 +262,7 @@ const Checkout = () => {
                   onClick={() => {
                     setCheckoutStage(2)
                   }}
+                  disabled={checkFirstFormError() || checkFirstFormTouched()}
                 >
                   Continuar com o pagamento
                 </S.FormButton>
